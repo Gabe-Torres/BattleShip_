@@ -14,4 +14,8 @@ RSpec.describe Cell do
     expect(@cell.coordinate).to eq("B4")
     expect(@cell.ship).to eq(nil)
   end
+
+  it 'starts out empty' do 
+    expect(@cell.empty?).to eq(true)
+  end
 end

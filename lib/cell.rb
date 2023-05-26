@@ -5,4 +5,6 @@ class Cell
     @coordinate = coordinate
     @ship = nil
   end
+
+
 end
