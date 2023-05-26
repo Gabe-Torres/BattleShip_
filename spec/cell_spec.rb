@@ -26,4 +26,12 @@ RSpec.describe Cell do
     expect(@cell.ship).to eq(@cruiser)
     expect(@cell.empty?).to eq(false)
   end
+
+  it 'can be fired upon' do
+    @cell.place_ship(@cruiser)
+    expect(@cell.fired_upon?).to eq(false)
+    @cell.fire_upon
+    expect(@cell.ship.health).to eq(2)
+    expect(@cell.fired_upon?).to eq(true)
+  end
 end
