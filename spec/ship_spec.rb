@@ -10,5 +10,11 @@ RSpec.describe Ship do
     expect(@cruiser).to be_an_instance_of(Ship)
     expect(@submarine).to be_an_instance_of(Ship)
   end
-  
+
+  it 'has attributes' do
+    expect(@cruiser.name).to eq("Cruiser")
+    expect(@submarine.name).to eq("Submarine")
+    expect(@cruiser.length).to eq(3)
+    expect(@submarine.length).to eq(2)
+  end
 end
