@@ -4,7 +4,9 @@ require './lib/cell'
 RSpec.describe Cell do
   before(:each) do
   @cell = Cell.new('B4')
+  @cell_2 = Cell.new('C3')
   @cruiser = Ship.new("Cruiser", 3)
+
   end
 
   it 'exists' do
@@ -39,5 +41,18 @@ RSpec.describe Cell do
     expect(@cell.render).to eq(".")
     @cell.fire_upon
     expect(@cell.render).to eq("M")
+  end
+
+  it 'renders a string representation with new a ship' do 
+    @cell_2.place_ship(@cruiser)
+    expect(@cell_2.render).to eq(".")
+    expect(@cell_2.render(true)).to eq("S")
+    @cell_2.fire_upon
+    expect(@cell_2.render).to eq("H")
+    expect(@cruiser.sunk?).to eq(false)
+    @cruiser.hit
+    @cruiser.hit
+    expect(@cruiser.sunk?).to eq(true)
+    expect(@cell_2.render).to eq("X")
   end
 end
