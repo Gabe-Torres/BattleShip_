@@ -23,4 +23,11 @@ class Cell
    @fired_upon
   end
 
+  def fire_upon
+    @fired_upon = true
+    if @ship
+      @ship.hit
+    end
+  end
+
 end
