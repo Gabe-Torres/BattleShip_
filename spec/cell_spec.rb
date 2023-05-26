@@ -34,4 +34,10 @@ RSpec.describe Cell do
     expect(@cell.ship.health).to eq(2)
     expect(@cell.fired_upon?).to eq(true)
   end
+
+  it 'renders a string representation' do
+    expect(@cell.render).to eq(".")
+    @cell.fire_upon
+    expect(@cell.render).to eq("M")
+  end
 end
