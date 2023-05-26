@@ -30,4 +30,11 @@ class Cell
     end
   end
 
+  def render
+    if !fired_upon? 
+      "."
+    else empty? 
+      "M" 
+    end
+  end
 end
