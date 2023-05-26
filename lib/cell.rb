@@ -20,7 +20,7 @@ class Cell
   end
 
   def fired_upon?
-   @fired_upon
+    @fired_upon
   end
 
   def fire_upon
@@ -30,4 +30,11 @@ class Cell
     end
   end
 
+  def render(show_ship = false)
+    return "X" if ship && ship.sunk?
+    return "H" if fired_upon? && ship
+    return "M" if fired_upon?
+    return "S" if show_ship && ship
+    "."
+  end
 end
