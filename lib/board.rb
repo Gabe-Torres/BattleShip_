@@ -44,5 +44,7 @@ class Board
   
   def diagonal_coordinates?(coordinates)
     letters = coordinates.map { |coordinate| coordinate[0].ord }
+    numbers = coordinates.map { |coordinate| coordinate[1..-1].to_i }
   end
+
 end
