@@ -7,5 +7,5 @@ class Board
 
   def cells
     @board = Hash.new 
-  end
+  e
 end
