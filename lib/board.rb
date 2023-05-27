@@ -6,6 +6,13 @@ class Board
   end
 
   def cells
-    @board = Hash.new 
-  e
+    cells = {}
+    ("A".."D").each do |letter|
+      (1..4).each do |num|
+        coordinate = "#{letter}#{num}"
+        cells[coordinate] = Cell.new(coordinate)
+      end
+    end
+    cells
+  end
 end
