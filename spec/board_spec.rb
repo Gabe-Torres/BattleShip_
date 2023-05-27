@@ -26,8 +26,10 @@ RSpec.describe Board do
     expect(@board.valid_coordinate?("A22")).to eq(false)
   end
 
-  it "validates ship placement" do
-    expect(board.valid_placement?(cruiser, ["A1", "A2"])).to eq(false)
-    expect(board.valid_placement?(submarine, ["A2", "A3", "A4"])).to eq(false)
+  it "validates ship placement accorgin to length" do
+    expect(@board.valid_placement?(@cruiser, ["A1", "A2"])).to eq(false)
+    expect(@board.valid_placement?(@submarine, ["A2", "A3", "A4"])).to eq(false)
   end
+
+  it "validates ship"
 end 
