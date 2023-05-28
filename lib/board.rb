@@ -39,12 +39,14 @@ class Board
     consecutive_letters = letters.each_cons(2).all? { |a, i| i == a + 1 }
     consecutive_numbers = numbers.each_cons(2).all? { |a, i| i == a + 1 }
 
-    consecutive_letters || consecutive_numbers
+    !consecutive_letters && !consecutive_numbers
   end
   
   def diagonal_coordinates?(coordinates)
     letters = coordinates.map { |coordinate| coordinate[0].ord }
     numbers = coordinates.map { |coordinate| coordinate[1..-1].to_i }
+
+    letters.uniq.length > 1 && numbers.uniq.length > 1
   end
 
 end
