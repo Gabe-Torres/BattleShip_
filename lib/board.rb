@@ -23,7 +23,7 @@ class Board
   def valid_placement?(ship, coordinates)
     if coordinates.length != ship.length
       false
-    elsif consecutive_coordinates?(coordinates)
+    elsif consecutive_coordinates?(coordinates) == false
       false
     elsif diagonal_coordinates?(coordinates)
       false
@@ -39,7 +39,7 @@ class Board
     consecutive_letters = letters.each_cons(2).all? { |a, i| i == a + 1 }
     consecutive_numbers = numbers.each_cons(2).all? { |a, i| i == a + 1 }
 
-    !consecutive_letters && !consecutive_numbers
+    consecutive_letters || consecutive_numbers
   end
   
   def diagonal_coordinates?(coordinates)
