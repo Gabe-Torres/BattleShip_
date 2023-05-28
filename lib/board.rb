@@ -49,4 +49,8 @@ class Board
     letters.uniq.length > 1 && numbers.uniq.length > 1
   end
 
+  def place(ship, coordinates)
+    @ship = ship
+  end
+  
 end
