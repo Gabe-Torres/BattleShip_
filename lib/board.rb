@@ -2,10 +2,10 @@ class Board
   attr_reader :cells
 
   def initialize
-    @cells = cells
+    @cells = make_cells
   end
 
-  def cells
+  def make_cells
     cells = {}
     ("A".."D").each do |letter|
       (1..4).each do |num|
@@ -49,4 +49,9 @@ class Board
     letters.uniq.length > 1 && numbers.uniq.length > 1
   end
 
+  def place(ship, coordinates)
+    coordinates.each do |coordinate|
+      @cells[coordinate].place_ship(ship)
+    end
+  end
 end
