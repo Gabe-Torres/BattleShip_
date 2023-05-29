@@ -1,15 +1,16 @@
 class Board
-  attr_reader :cells
-
+  attr_reader :cells,
+              :existing_coordinates
   def initialize
     @cells = make_cells
+    @existing_coordinates = []
   end
 
   def make_cells
     cells = {}
     ("A".."D").each do |letter|
       (1..4).each do |num|
-        coordinate = "#{letter}#{num}"
+        coordinate = "#{letter}#{num}" 
         cells[coordinate] = Cell.new(coordinate)
       end
     end
@@ -21,20 +22,26 @@ class Board
   end
 
   def valid_placement?(ship, coordinates)
-    if coordinates.length != ship.length
+    if overlap?(coordinates) == true
+      false
+    elsif coordinates.length != ship.length
       false
     elsif consecutive_coordinates?(coordinates) == false
       false
-    elsif diagonal_coordinates?(coordinates)
+    elsif diagonal_coordinates?(coordinates) == true
       false
-    else
+    else 
       true
     end
   end
 
   def consecutive_coordinates?(coordinates)
-    letters = coordinates.map { |coordinate| coordinate[0].ord }
-    numbers = coordinates.map { |coordinate| coordinate[1..-1].to_i }
+    letters = coordinates.map do |coordinate| 
+      coordinate[0].ord 
+    end
+    numbers = coordinates.map do |coordinate| 
+      coordinate[1..-1].to_i 
+    end
 
     consecutive_letters = letters.each_cons(2).all? { |a, i| i == a + 1 }
     consecutive_numbers = numbers.each_cons(2).all? { |a, i| i == a + 1 }
@@ -50,8 +57,17 @@ class Board
   end
 
   def place(ship, coordinates)
+    @existing_coordinates += coordinates
     coordinates.each do |coordinate|
       @cells[coordinate].place_ship(ship)
+    end
+      @existing_coordinates
+  end
+  
+
+  def overlap?(coordinates)
+    coordinates.any? do |coord|
+      @existing_coordinates.include?(coord)
     end
   end
 end

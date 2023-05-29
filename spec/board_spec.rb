@@ -26,7 +26,7 @@ RSpec.describe Board do
     expect(@board.valid_coordinate?("A22")).to eq(false)
   end
 
-  it "validates ship placement accorgin to length" do
+  it "validates ship placement according to length" do
     expect(@board.valid_placement?(@cruiser, ["A1", "A2"])).to eq(false)
     expect(@board.valid_placement?(@submarine, ["A2", "A3", "A4"])).to eq(false)
   end
@@ -57,5 +57,10 @@ RSpec.describe Board do
     expect(@cell_2.ship).to eq(@cruiser)
     expect(@cell_3.ship).to eq(@cruiser)
     expect(@cell_3.ship == @cell_2.ship).to eq(true)
+  end
+
+  it "does not allow ships to overlap" do
+    @board.place(@cruiser, ["A1", "A2", "A3"]) 
+    expect(@board.valid_placement?(@submarine, ["A1", "B1"])).to eq(false)
   end
 end 
