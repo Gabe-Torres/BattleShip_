@@ -70,4 +70,18 @@ class Board
       @existing_coordinates.include?(coord)
     end
   end
+
+  def render(show_ship = false)
+    rendered_board = "  1 2 3 4 \n"
+    ("A".."D").each do |letter|
+      row = "#{letter} "
+      (1..4).each do |num|
+        coordinate = "#{letter}#{num}"
+        cell = @cells[coordinate]
+        row += cell.render(show_ship) + " "
+      end
+      rendered_board += row.strip + " \n"
+    end
+    rendered_board
+  end
 end
