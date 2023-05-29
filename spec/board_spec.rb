@@ -69,4 +69,24 @@ RSpec.describe Board do
     expect(@board.render).to eq("  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n")
     expect(@board.render(true)).to eq("  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n")
   end
+
+  it " renders hits, misses and sunken ships" do
+    @board.place(@cruiser, ["A1", "A2", "A3"])
+    @board.place(@submarine, ["C1", "D1"])
+    @cell = @board.cells["A1"]
+    @cell_2 = @board.cells["B4"]
+    @cell_3 = @board.cells["C1"]
+    @cell_4 = @board.cells["D1"]
+    @cell.fire_upon
+    @cell_2.fire_upon
+    @cell_3.fire_upon
+    @cell_4.fire_upon
+
+
+    expect(@board.render(true)).to eq("  1 2 3 4 \n" +
+                                      "A H S S . \n" +
+                                      "B . . . M \n" +
+                                      "C X . . . \n" +
+                                      "D X . . . \n")
+  end
 end 
