@@ -1,7 +1,7 @@
 require './lib/board'
 require './lib/ship'
 require './lib/cell'
-require './game/cell'
+require './lib/game'
 
 RSpec.describe Game do
   before(:each) do
