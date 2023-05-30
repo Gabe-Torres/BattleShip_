@@ -18,5 +18,16 @@ RSpec.describe Game do
   it "has a main menu" do 
     expect(@game.main_menu).to eq(puts "string")
   end
-  
+
+  it "sets up game" do 
+
+  end
+
+  it "places player ships" do 
+
+  end
+
+  it "places computer ships" do 
+
+  end 
 end 

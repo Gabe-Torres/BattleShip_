@@ -35,12 +35,13 @@ class Game #have to make runner file
       D . . . . "
       player_place_ships
     end
-
+    
+    def computer_place_ships
+    end
+    
     def  player_place_ships
     end
 
-    def computer_place_ships
-    end
 
     def play_game
       loop do
