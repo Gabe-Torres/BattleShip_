@@ -3,10 +3,11 @@ class Game #have to make runner file
     @ships = [@cruiser, @submarine]
     @board = Board.new 
   end
-
-def main_menu
+    
+  def main_menu
     puts "Welcome Mariner! To BATTLESHIP. Ready up.
     Enter p to head into the sea-fight. Enter q to head back to the bunks."
+  end
 end
 
   #main menu
