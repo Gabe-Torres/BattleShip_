@@ -42,13 +42,13 @@ class Game #have to make runner file
     
     def  player_place_ships
       puts "Enter the squares for the Cruiser (3 spaces):"
-      cruiser_input = gets.chomp.upcase
+      cruiser_input = gets.chomp.upcase.split(" , ")
       @player_ships << cruiser_input
       puts "Enter the squares for the Submarine (2 spaces):"
-      submarine_input = gets.chomp.upcase
+      submarine_input = gets.chomp.upcase.split(" , ")
       @player_ships << submarine_input
       puts "Ships have been placed!"
-
+      # add valid placement
     end
 
 
