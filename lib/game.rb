@@ -1,7 +1,9 @@
 class Game #have to make runner file 
   def initialize
-    @ships = [@cruiser, @submarine]
-    @board = Board.new 
+    @player_ships = []
+    @computer_ships = []
+    @computer_board = Board.new 
+    @player_board = Board.new
   end
     
   def main_menu
@@ -10,23 +12,65 @@ class Game #have to make runner file
     choice = gets.chomp.downcase 
   
     case choice 
-    when "p"
-      start_game
-    when "q"
-      end_game
-    else 
+      when "p"
+        start_game
+      when "q"
+        end_game
+      else 
       puts "Invalid choice. Please enter p or q."
+    end    
   end
-    # puts "I have laid out my ships on the grid.
-    # You now need to lay out your two ships.
-    # The Cruiser is three units long and the Submarine is two units long.
-    #   1 2 3 4
-    # A . . . .
-    # B . . . .
-    # C . . . .
-    # D . . . . "
-    
+
+    def start_game
+      puts "I have laid out my ships on the grid.
+      You now need to lay out your two ships.
+      The Cruiser is three units long and the Submarine is two units long.
+        1 2 3 4
+      A . . . .
+      B . . . .
+      C . . . .
+      D . . . . "
+      play_game 
+    end
+
+    def play_game
+      loop do
+        display_boards
+  
+        player_turn
+        break if game_over?
+  
+        computer_turn
+        break if game_over?
+      end
+  
+      display_boards
+      announce_winner
+      play_again?
+    end
+    def display_boards
+      puts "=============COMPUTER BOARD============="
+      puts @computer_board.render
+      puts "==============PLAYER BOARD=============="
+      puts @player_board.render(true)
+    end
   end
+  
+
+    # def setup_board 
+    #   @ships.each do |ship|
+    #     # puts "Placed Ships"
+    #     @board.render(true)
+    #     puts 'Enter Coordinates'
+    #     coordinates = gets.chomp
+    #     @board.place(ship, coordinates)
+    #   end
+    #     puts "Ships have been placed"
+    # end
+
+
+
+
 
   # def play
   #   main_menu
@@ -38,7 +82,6 @@ class Game #have to make runner file
   #   results
   #   end_game
   # end
-end
 
   #main menu
     # return to screen once game ends -method for restarting the game, should this be place beginning or end?
