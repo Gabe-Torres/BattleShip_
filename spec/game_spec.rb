@@ -12,8 +12,6 @@ RSpec.describe Game do
   end
 
   it 'exist' do 
-      expect(@board).to be_an_instance_of(Board)
+      expect(@game).to be_an_instance_of(Game)
   end 
-
-  
 end 
