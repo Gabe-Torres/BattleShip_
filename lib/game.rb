@@ -48,6 +48,7 @@ class Game #have to make runner file
       announce_winner
       play_again?
     end
+    
     def display_boards
       puts "=============COMPUTER BOARD============="
       puts @computer_board.render
