@@ -18,4 +18,5 @@ RSpec.describe Game do
   it "has a main menu" do 
     expect(@game.main_menu).to eq(puts "string")
   end
+  
 end 
