@@ -22,17 +22,10 @@ class Board
   end
 
   def valid_placement?(ship, coordinates)
-    if overlap?(coordinates) == true
-      false
-    elsif coordinates.length != ship.length
-      false
-    elsif consecutive_coordinates?(coordinates) == false
-      false
-    elsif diagonal_coordinates?(coordinates) == true
-      false
-    else 
-      true
-    end
+    !overlap?(coordinates) && 
+    coordinates.length == ship.length && 
+    consecutive_coordinates?(coordinates) && 
+    !diagonal_coordinates?(coordinates)
   end
 
   def consecutive_coordinates?(coordinates)
