@@ -16,7 +16,6 @@ RSpec.describe Game do
   end 
 
   it "has a main menu" do 
-    expect(@game.main_menu).to eq(puts "Welcome Mariner! To BATTLESHIP. Ready up.
-      Enter p to head into the sea-fight. Enter q to head back to the bunks.")
+    expect(@game.main_menu).to eq(puts "string")
   end
 end 

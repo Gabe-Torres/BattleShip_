@@ -8,6 +8,16 @@ class Game #have to make runner file
     puts "Welcome Mariner! To BATTLESHIP. Ready up.
     Enter p to head into the sea-fight. Enter q to head back to the bunks."
   end
+
+  def play
+    main_menu
+    player_place_ships 
+    cpu_place_ships
+    display_board
+    take_turn
+    results
+    end_game
+  end
 end
 
   #main menu
