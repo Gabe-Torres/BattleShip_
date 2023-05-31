@@ -15,7 +15,7 @@ class Game #have to make runner file
     choice = gets.chomp.downcase
     if choice == "p"
       setup_game
-      play_game
+      turn
     elsif choice == "q"
       puts "Thanks for playing!"
       exit
@@ -35,77 +35,91 @@ class Game #have to make runner file
       B . . . .
       C . . . .
       D . . . . "
-      player_place_ships
+      player_place_cruiser
+      player_place_sub
+      puts "Ships have been placed!"
     end
     
     def computer_place_ships
-
+      random_cruiser_coordinates = @computer_board.cells.keys.sample(3)
+      until @computer_board.valid_placement?(@computer_cruiser, random_cruiser_coordinates)
+        random_cruiser_coordinates = @computer_board.cells.keys.sample(3)
+      end
+        @computer_board.place(@computer_cruiser, random_cruiser_coordinates)
+        random_sub_coordinates = @computer_board.cells.keys.sample(2)
+      until @computer_board.valid_placement?(@computer_submarine, random_sub_coordinates)
+          random_sub_coordinates = @computer_board.cells.keys.sample(2)
+      end
+      @computer_board.place(@computer_submarine, random_sub_coordinates)
     end
     
-    def  player_place_ships
+    def  player_place_cruiser
       puts "Enter the squares for the Cruiser (3 spaces):"
       cruiser_coordinate = gets.chomp.upcase.split
-      @player_board.place(@player_cruiser, cruiser_coordinate)
-      puts "Enter the squares for the Submarine (2 spaces):"
-      submarine_coordinate = gets.chomp.upcase.split
-      @player_board.place(@player_submarine, submarine_coordinate)
-      puts "Ships have been placed!"
-
-      # add valid placement
-    end
-
-
-    def play_game
-      loop do
-        display_boards
-  
-        player_turn
-        break if game_over?
-  
-        computer_turn
-        break if game_over?
+      if @player_board.valid_placement?(@player_cruiser, cruiser_coordinate) == true
+        @player_board.place(@player_cruiser, cruiser_coordinate)
+      else
+        puts "Invalid coordinates!"
+        player_place_cruiser
       end
-  
-      display_boards
-      announce_winner
-      play_again?
     end
-    
+
+    def player_place_sub
+        puts "Enter the squares for the Submarine (2 spaces):"
+        submarine_coordinate = gets.chomp.upcase.split
+        if @player_board.valid_placement?(@player_submarine, submarine_coordinate) == true
+          @player_board.place(@player_submarine, submarine_coordinate)
+        else
+          puts "Invalid coordinates!"
+          player_place_sub
+        end
+    end
+
+    def turn
+      display_boards
+      puts "Fire when ready!!!"
+      shot_coordinate = gets.chomp.upcase
+      @computer_board.cells[shot_coordinate].fire_upon
+      puts @computer_board.render
+
+    end
+
     def display_boards
       puts "=============COMPUTER BOARD============="
       puts @computer_board.render
       puts "==============PLAYER BOARD=============="
       puts @player_board.render(true)
     end
-
-    def render(show_ship = false)
-      return "X" if ship && ship.sunk?
-      return "H" if fired_upon? && ship
-      return "M" if fired_upon?
-      return "S" if show_ship && ship
-      "."
-    end
-    
-    def player_turn
-      puts "Enter coordinates to fire upon"
-      coordinate = gets.chomp.upcase
-
-      result = @computer_board.fire_upon(coordinate)
-    end
-
-    def fire_upon(coordinate)
-      @fired_upon = true
-      if @ship
-        @ship.hit
-      end
-    end
-
   end
-  
+    
+  #   def player_turn
+  #     puts "Enter coordinates to fire upon"
+  #     coordinate = gets.chomp.upcase
+      
+  #     result = @computer_board.fire_upon(coordinate)
 
-    # def setup_board 
-    #   @ships.each do |ship|
-    #     # puts "Placed Ships"
+  # end
+  
+  
+  # def play_game
+  #   loop do
+  #     display_boards
+
+  #     player_turn
+  #     break if game_over?
+
+  #     computer_turn
+  #     break if game_over?
+  #   end
+
+  #   display_boards
+  #   announce_winner
+  #   play_again?
+  # end
+
+  # def setup_board 
+  #   @ships.each do |ship|
+  #     # puts "Placed Ships"
     #     @board.render(true)
     #     puts 'Enter Coordinates'
     #     coordinates = gets.chomp
