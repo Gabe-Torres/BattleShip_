@@ -1,7 +1,9 @@
 class Game #have to make runner file 
   def initialize
-    @player_ships = []
-    @computer_ships = []
+    @player_cruiser = Ship.new("Cruiser", 3)
+    @player_submarine = Ship.new("Submarine", 2)
+    @computer_cruiser = Ship.new("Cruiser", 3)
+    @computer_submarine = Ship.new("Submarine", 2)
     @computer_board = Board.new 
     @player_board = Board.new
   end
@@ -19,7 +21,7 @@ class Game #have to make runner file
       exit
     else
       puts "Invalid choice. Please try again."
-      play
+      main_menu
     end
   end
 
@@ -42,12 +44,13 @@ class Game #have to make runner file
     
     def  player_place_ships
       puts "Enter the squares for the Cruiser (3 spaces):"
-      cruiser_input = gets.chomp.upcase.split(" , ")
-      @player_ships << cruiser_input
+      cruiser_coordinate = gets.chomp.upcase.split
+      @player_board.place(@player_cruiser, cruiser_coordinate)
       puts "Enter the squares for the Submarine (2 spaces):"
-      submarine_input = gets.chomp.upcase.split(" , ")
-      @player_ships << submarine_input
+      submarine_coordinate = gets.chomp.upcase.split
+      @player_board.place(@player_submarine, submarine_coordinate)
       puts "Ships have been placed!"
+
       # add valid placement
     end
 
@@ -74,6 +77,29 @@ class Game #have to make runner file
       puts "==============PLAYER BOARD=============="
       puts @player_board.render(true)
     end
+
+    def render(show_ship = false)
+      return "X" if ship && ship.sunk?
+      return "H" if fired_upon? && ship
+      return "M" if fired_upon?
+      return "S" if show_ship && ship
+      "."
+    end
+    
+    def player_turn
+      puts "Enter coordinates to fire upon"
+      coordinate = gets.chomp.upcase
+
+      result = @computer_board.fire_upon(coordinate)
+    end
+
+    def fire_upon(coordinate)
+      @fired_upon = true
+      if @ship
+        @ship.hit
+      end
+    end
+
   end
   
 
