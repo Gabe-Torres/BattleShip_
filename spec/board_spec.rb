@@ -46,7 +46,7 @@ RSpec.describe Board do
   end
 
   it "has a consecutive coordinates helper" do 
-    # expect(@board.consecutive_coordinates?(["A1", "D2"])).to eq(false)
+    expect(@board.consecutive_coordinates?(["A1", "A4"])).to eq(false)
     expect(@board.consecutive_coordinates?(["A1", "A2"])).to eq(true)
     # expect(@board.consecutive_coordinates?(["C1", "B1", "A1"])).to eq(true)
   end
@@ -59,7 +59,6 @@ RSpec.describe Board do
     expect(@board.overlap?(["D1", "D2"])).to eq(false)
     expect(@board.overlap?(["B3", "B4"])).to eq(true)
     expect(@board.overlap?(["D3", "D4"])).to eq(false)
-
   end
 
   it "validates that ships can't be placed diagonally" do
