@@ -38,6 +38,29 @@ RSpec.describe Board do
     expect(@board.valid_placement?(@submarine, ["C1", "B1"])).to eq(false)
   end
 
+  it "has a diagonal_coordinates helper" do 
+    expect(@board.diagonal_coordinates?(["B3", "B4"])).to eq(false)
+    expect(@board.diagonal_coordinates?(["C2", "D1"])).to eq(true)
+    expect(@board.diagonal_coordinates?(["A1", "B2"])).to eq(true)
+    expect(@board.diagonal_coordinates?(["A1", "A2"])).to eq(false)
+  end
+
+  it "has a consecutive coordinates helper" do 
+    expect(@board.consecutive_coordinates?(["A1", "A4"])).to eq(false)
+    expect(@board.consecutive_coordinates?(["A1", "A2"])).to eq(true)
+    # expect(@board.consecutive_coordinates?(["C1", "B1", "A1"])).to eq(true)
+  end
+
+  it "has a overlap helper" do 
+    @board.place(@cruiser, ["A1", "B1", "C1"])
+    @board.place(@submarine, ["B3", "B4"])
+
+    expect(@board.overlap?(["A1", "A2", "A3"])).to eq(true)
+    expect(@board.overlap?(["D1", "D2"])).to eq(false)
+    expect(@board.overlap?(["B3", "B4"])).to eq(true)
+    expect(@board.overlap?(["D3", "D4"])).to eq(false)
+  end
+
   it "validates that ships can't be placed diagonally" do
     expect(@board.valid_placement?(@cruiser, ["A1", "B2", "C3"])).to eq(false)
     expect(@board.valid_placement?(@submarine, ["C2", "D3"])).to eq(false)
