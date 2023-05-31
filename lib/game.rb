@@ -35,23 +35,35 @@ class Game #have to make runner file
       B . . . .
       C . . . .
       D . . . . "
-      player_place_ships
+      player_place_cruiser
+      player_place_sub
+      puts "Ships have been placed!"
     end
     
     def computer_place_ships
 
     end
     
-    def  player_place_ships
+    def  player_place_cruiser
       puts "Enter the squares for the Cruiser (3 spaces):"
       cruiser_coordinate = gets.chomp.upcase.split
-      @player_board.place(@player_cruiser, cruiser_coordinate)
-      puts "Enter the squares for the Submarine (2 spaces):"
-      submarine_coordinate = gets.chomp.upcase.split
-      @player_board.place(@player_submarine, submarine_coordinate)
-      puts "Ships have been placed!"
+      if @player_board.valid_placement?(@player_cruiser, cruiser_coordinate) == true
+        @player_board.place(@player_cruiser, cruiser_coordinate)
+      else
+        puts "Invalid coordinates!"
+        player_place_cruiser
+      end
+    end
 
-      # add valid placement
+    def player_place_sub
+        puts "Enter the squares for the Submarine (2 spaces):"
+        submarine_coordinate = gets.chomp.upcase.split
+        if @player_board.valid_placement?(@player_submarine, submarine_coordinate) == true
+          @player_board.place(@player_submarine, submarine_coordinate)
+        else
+          puts "Invalid coordinates!"
+          player_place_sub
+        end
     end
 
 
