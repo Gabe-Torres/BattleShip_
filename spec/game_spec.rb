@@ -6,7 +6,8 @@ require './lib/game'
 RSpec.describe Game do
   before(:each) do
     @game = Game.new
-    @board = Board.new
+    @player_board = Board.new
+    @computer_board = Board.new
     @player_cruiser = Ship.new("Cruiser", 3)
     @player_submarine = Ship.new("Submarine", 2)
     @computer_cruiser = Ship.new("Cruiser", 3)
@@ -22,6 +23,11 @@ RSpec.describe Game do
     expect(@player_submarine).to be_a(Ship)
     expect(@computer_cruiser).to be_a(Ship)
     expect(@computer_submarine).to be_a(Ship)
+  end
+
+  it "has boards" do
+    expect(@player_board).to be_a(Board)
+    expect(@computer_board).to be_an_instance_of(Board)
   end
 
  
