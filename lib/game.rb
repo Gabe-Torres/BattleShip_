@@ -86,7 +86,7 @@ class Game
       end
       if @computer_board.cells[shot_coordinate].ship
           puts " Your shot on #{shot_coordinate} was a HIT!"
-      if @computer_board.cells[shot_coordinate].ship.sunk?
+        if @computer_board.cells[shot_coordinate].ship.sunk?
           puts "You sunk a ship!!"
       end
       else
@@ -102,7 +102,7 @@ class Game
       @player_board.cells[cpu_shot_coordinate].fire_upon
       if @player_board.cells[cpu_shot_coordinate].ship
           puts "The computer's shot on #{cpu_shot_coordinate} hit your ship!"
-      if @player_board.cells[cpu_shot_coordinate].ship.sunk?
+        if @player_board.cells[cpu_shot_coordinate].ship.sunk?
           puts "Your ship has been sunk!"
       end
       else
