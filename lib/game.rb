@@ -79,7 +79,12 @@ class Game #have to make runner file
       display_boards
       puts "Fire when ready!!!"
       shot_coordinate = gets.chomp.upcase
+      if @computer_board.valid_coordinate?(shot_coordinate)
       @computer_board.cells[shot_coordinate].fire_upon
+      else
+        puts "Invalid coordinate, Try again"
+        turn
+      end
       player_wins
       puts "My turn to shoot!!"
     
