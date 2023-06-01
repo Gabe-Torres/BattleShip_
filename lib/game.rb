@@ -1,29 +1,29 @@
 class Game
-  def initialize
-    @player_cruiser = Ship.new("Cruiser", 3)
-    @player_submarine = Ship.new("Submarine", 2)
-    @computer_cruiser = Ship.new("Cruiser", 3)
-    @computer_submarine = Ship.new("Submarine", 2)
-    @computer_board = Board.new 
-    @player_board = Board.new
-  end
-    
-  def main_menu
-    puts "Welcome Mariner! To BATTLESHIP. Ready up.
-    Enter p to head into the sea-fight. Enter q to head back to the bunks."
-    
-    choice = gets.chomp.downcase
-    if choice == "p"
-      setup_game
-      turn
-    elsif choice == "q"
-      puts "Thanks for playing!"
-      exit
-    else
-      puts "Invalid choice. Please try again."
-      main_menu
+    def initialize
+      @player_cruiser = Ship.new("Cruiser", 3)
+      @player_submarine = Ship.new("Submarine", 2)
+      @computer_cruiser = Ship.new("Cruiser", 3)
+      @computer_submarine = Ship.new("Submarine", 2)
+      @computer_board = Board.new 
+      @player_board = Board.new
     end
-  end
+    
+    def main_menu
+      puts "Welcome Mariner! To BATTLESHIP. Ready up.
+      Enter p to head into the sea-fight. Enter q to head back to the bunks."
+    
+      choice = gets.chomp.downcase
+      if choice == "p"
+        setup_game
+        turn
+      elsif choice == "q"
+        puts "Thanks for playing!"
+        exit
+      else
+        puts "Invalid choice. Please try again."
+        main_menu
+      end
+    end
 
     def setup_game
       computer_place_ships
@@ -45,8 +45,8 @@ class Game
       until @computer_board.valid_placement?(@computer_cruiser, random_cruiser_coordinates)
         random_cruiser_coordinates = @computer_board.cells.keys.sample(3)
       end
-        @computer_board.place(@computer_cruiser, random_cruiser_coordinates)
-        random_sub_coordinates = @computer_board.cells.keys.sample(2)
+      @computer_board.place(@computer_cruiser, random_cruiser_coordinates)
+      random_sub_coordinates = @computer_board.cells.keys.sample(2)
       until @computer_board.valid_placement?(@computer_submarine, random_sub_coordinates)
         random_sub_coordinates = @computer_board.cells.keys.sample(2)
       end
@@ -59,37 +59,37 @@ class Game
       if @player_board.valid_placement?(@player_cruiser, cruiser_coordinate) == true
         @player_board.place(@player_cruiser, cruiser_coordinate)
       else
-        puts "Invalid coordinates!"
-        player_place_cruiser
+      puts "Invalid coordinates!"
+      player_place_cruiser
       end
     end
 
     def player_place_sub
-        puts "Enter the squares for the Submarine (2 spaces):"
-        submarine_coordinate = gets.chomp.upcase.split
-        if @player_board.valid_placement?(@player_submarine, submarine_coordinate) == true
+      puts "Enter the squares for the Submarine (2 spaces):"
+      submarine_coordinate = gets.chomp.upcase.split
+      if @player_board.valid_placement?(@player_submarine, submarine_coordinate) == true
           @player_board.place(@player_submarine, submarine_coordinate)
-        else
-          puts "Invalid coordinates!"
-          player_place_sub
-        end
+      else
+        puts "Invalid coordinates!"
+        player_place_sub
+      end
     end
 
     def turn
       puts "Fire when ready!!!"
       shot_coordinate = gets.chomp.upcase
       if @computer_board.valid_coordinate?(shot_coordinate)
-      @computer_board.cells[shot_coordinate].fire_upon
+          @computer_board.cells[shot_coordinate].fire_upon
       else
         puts "Invalid coordinate, Try again"
         turn
       end
       if @computer_board.cells[shot_coordinate].ship
           puts " Your shot on #{shot_coordinate} was a HIT!"
-        if @computer_board.cells[shot_coordinate].ship.sunk?
+      if @computer_board.cells[shot_coordinate].ship.sunk?
           puts "You sunk a ship!!"
-        end
-        else
+      end
+      else
           puts "Your shot on #{shot_coordinate} was a MISS!"
       end
       player_wins
@@ -97,23 +97,21 @@ class Game
     
       cpu_shot_coordinate = @player_board.cells.keys.sample
       until !@player_board.cells[cpu_shot_coordinate].fired_upon?
-        cpu_shot_coordinate = @player_board.cells.keys.sample
+          cpu_shot_coordinate = @player_board.cells.keys.sample
       end
-    
       @player_board.cells[cpu_shot_coordinate].fire_upon
-    
       if @player_board.cells[cpu_shot_coordinate].ship
-        puts "The computer's shot on #{cpu_shot_coordinate} hit your ship!"
-        if @player_board.cells[cpu_shot_coordinate].ship.sunk?
+          puts "The computer's shot on #{cpu_shot_coordinate} hit your ship!"
+      if @player_board.cells[cpu_shot_coordinate].ship.sunk?
           puts "Your ship has been sunk!"
-        end
-        else
-        puts "The computer's shot on #{cpu_shot_coordinate} missed your ship!"
+      end
+      else
+          puts "The computer's shot on #{cpu_shot_coordinate} missed your ship!"
       end
       display_boards
       cpu_wins
       turn
-  end
+    end
 
     def player_wins
       if @computer_cruiser.sunk? && @computer_submarine.sunk?

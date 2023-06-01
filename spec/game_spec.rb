@@ -39,6 +39,4 @@ RSpec.describe Game do
     expect(@player_cruiser.sunk?).to eq(true)
     expect(@player_submarine.sunk?).to eq(true)
   end
-
- 
 end 

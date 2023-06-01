@@ -48,7 +48,6 @@ RSpec.describe Board do
   it "has a consecutive coordinates helper" do 
     expect(@board.consecutive_coordinates?(["A1", "A4"])).to eq(false)
     expect(@board.consecutive_coordinates?(["A1", "A2"])).to eq(true)
-    # expect(@board.consecutive_coordinates?(["C1", "B1", "A1"])).to eq(true)
   end
 
   it "has a overlap helper" do 
@@ -93,7 +92,7 @@ RSpec.describe Board do
     expect(@board.render(true)).to eq("  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n")
   end
 
-  it " renders hits, misses and sunken ships" do
+  it "renders hits, misses and sunken ships" do
     @board.place(@cruiser, ["A1", "A2", "A3"])
     @board.place(@submarine, ["C1", "D1"])
     @cell = @board.cells["A1"]
@@ -104,7 +103,6 @@ RSpec.describe Board do
     @cell_2.fire_upon
     @cell_3.fire_upon
     @cell_4.fire_upon
-
 
     expect(@board.render(true)).to eq("  1 2 3 4 \n" +
                                       "A H S S . \n" +
