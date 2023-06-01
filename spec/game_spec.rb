@@ -30,5 +30,15 @@ RSpec.describe Game do
     expect(@computer_board).to be_an_instance_of(Board)
   end
 
+  it "sinks the ships" do
+    @player_cruiser.hit
+    @player_cruiser.hit
+    @player_cruiser.hit
+    @player_submarine.hit
+    @player_submarine.hit
+    expect(@player_cruiser.sunk?).to eq(true)
+    expect(@player_submarine.sunk?).to eq(true)
+  end
+
  
 end 
