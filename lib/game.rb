@@ -75,14 +75,50 @@ class Game #have to make runner file
         end
     end
 
+
+
     def turn
       display_boards
       puts "Fire when ready!!!"
       shot_coordinate = gets.chomp.upcase
       @computer_board.cells[shot_coordinate].fire_upon
-      puts @computer_board.render
+      # puts @computer_board.render
+      puts "My turn to shoot!!"
+    
+      cpu_shot_coordinate = @player_board.cells.keys.sample
+      until !@player_board.cells[cpu_shot_coordinate].fired_upon?
+        cpu_shot_coordinate = @player_board.cells.keys.sample
+      end
+    
+      @player_board.cells[cpu_shot_coordinate].fire_upon
+      # puts @player_board.render
+    
 
-    end
+      if @player_board.cells[cpu_shot_coordinate].ship
+        puts "The computer hit your ship!"
+        if @player_board.cells[cpu_shot_coordinate].ship.sunk?
+          puts "Your ship has been sunk!"
+        end
+      else
+        puts "The computer missed your ship!"
+      end
+      display_boards
+  end
+
+    # def turn
+    #   display_boards
+    #   puts "Fire when ready!!!"
+    #   shot_coordinate = gets.chomp.upcase
+    #   @computer_board.cells[shot_coordinate].fire_upon
+    #   puts @computer_board.render
+    #   puts "My turn to shoot!!"
+    #   cpu_random_shot_coordinate = @player_board.cells.keys.sample(1)
+    #   until @player_board.valid_coordinate?(cpu_random_shot_coordinate)
+    #     cpu_random_shot_coordinate = @player_board.cells.keys.sample(1)
+    #   end
+    #   @player_board.cells[cpu_random_shot_coordinate].fire_upon
+    #   puts @player_board.render(true)
+    # end
 
     def display_boards
       puts "=============COMPUTER BOARD============="
