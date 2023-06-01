@@ -75,14 +75,12 @@ class Game #have to make runner file
         end
     end
 
-
-
     def turn
       display_boards
       puts "Fire when ready!!!"
       shot_coordinate = gets.chomp.upcase
       @computer_board.cells[shot_coordinate].fire_upon
-      # puts @computer_board.render
+      player_wins
       puts "My turn to shoot!!"
     
       cpu_shot_coordinate = @player_board.cells.keys.sample
@@ -91,9 +89,7 @@ class Game #have to make runner file
       end
     
       @player_board.cells[cpu_shot_coordinate].fire_upon
-      # puts @player_board.render
     
-
       if @player_board.cells[cpu_shot_coordinate].ship
         puts "The computer hit your ship!"
         if @player_board.cells[cpu_shot_coordinate].ship.sunk?
@@ -103,22 +99,23 @@ class Game #have to make runner file
         puts "The computer missed your ship!"
       end
       display_boards
+      cpu_wins
+      turn
   end
 
-    # def turn
-    #   display_boards
-    #   puts "Fire when ready!!!"
-    #   shot_coordinate = gets.chomp.upcase
-    #   @computer_board.cells[shot_coordinate].fire_upon
-    #   puts @computer_board.render
-    #   puts "My turn to shoot!!"
-    #   cpu_random_shot_coordinate = @player_board.cells.keys.sample(1)
-    #   until @player_board.valid_coordinate?(cpu_random_shot_coordinate)
-    #     cpu_random_shot_coordinate = @player_board.cells.keys.sample(1)
-    #   end
-    #   @player_board.cells[cpu_random_shot_coordinate].fire_upon
-    #   puts @player_board.render(true)
-    # end
+    def player_wins
+      if @computer_cruiser.sunk? && @computer_submarine.sunk?
+        puts "You win!!"
+        main_menu
+      end
+    end
+
+    def cpu_wins
+      if @player_cruiser.sunk? && @player_submarine.sunk? 
+        puts "I win!!!"
+        main_menu 
+      end
+    end
 
     def display_boards
       puts "=============COMPUTER BOARD============="
@@ -127,62 +124,3 @@ class Game #have to make runner file
       puts @player_board.render(true)
     end
   end
-    
-  #   def player_turn
-  #     puts "Enter coordinates to fire upon"
-  #     coordinate = gets.chomp.upcase
-      
-  #     result = @computer_board.fire_upon(coordinate)
-
-  # end
-  
-  
-  # def play_game
-  #   loop do
-  #     display_boards
-
-  #     player_turn
-  #     break if game_over?
-
-  #     computer_turn
-  #     break if game_over?
-  #   end
-
-  #   display_boards
-  #   announce_winner
-  #   play_again?
-  # end
-
-  # def setup_board 
-  #   @ships.each do |ship|
-  #     # puts "Placed Ships"
-    #     @board.render(true)
-    #     puts 'Enter Coordinates'
-    #     coordinates = gets.chomp
-    #     @board.place(ship, coordinates)
-    #   end
-    #     puts "Ships have been placed"
-    # end
-
-
-
-
-
-  # def play
-  #   main_menu
-  #   start_game
-  #   player_place_ships 
-  #   cpu_place_ships
-  #   display_board
-  #   take_turn
-  #   results
-  #   end_game
-  # end
-
-  #main menu
-    # return to screen once game ends -method for restarting the game, should this be place beginning or end?
-    # puts welcome statement?? - then put welcome statement?
-  # computer places ships then player places ship & puts another statement showing how to play - method for computer to pick ships
-    # when player places a valid it should appear on the board, another puts statement - method for player to pick ships
-    # then they should place they're other ship, only allow for cruiser and submarine, ask for placements specifically
-    # after entering an incorrect position they should be prompted to try again until a correct placement is selected
