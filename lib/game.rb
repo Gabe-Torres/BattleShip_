@@ -1,4 +1,4 @@
-class Game #have to make runner file 
+class Game
   def initialize
     @player_cruiser = Ship.new("Cruiser", 3)
     @player_submarine = Ship.new("Submarine", 2)
@@ -48,7 +48,7 @@ class Game #have to make runner file
         @computer_board.place(@computer_cruiser, random_cruiser_coordinates)
         random_sub_coordinates = @computer_board.cells.keys.sample(2)
       until @computer_board.valid_placement?(@computer_submarine, random_sub_coordinates)
-          random_sub_coordinates = @computer_board.cells.keys.sample(2)
+        random_sub_coordinates = @computer_board.cells.keys.sample(2)
       end
       @computer_board.place(@computer_submarine, random_sub_coordinates)
     end
@@ -76,7 +76,6 @@ class Game #have to make runner file
     end
 
     def turn
-      display_boards
       puts "Fire when ready!!!"
       shot_coordinate = gets.chomp.upcase
       if @computer_board.valid_coordinate?(shot_coordinate)
@@ -84,6 +83,14 @@ class Game #have to make runner file
       else
         puts "Invalid coordinate, Try again"
         turn
+      end
+      if @computer_board.cells[shot_coordinate].ship
+          puts " Your shot on #{shot_coordinate} was a HIT!"
+        if @computer_board.cells[shot_coordinate].ship.sunk?
+          puts "You sunk a ship!!"
+        end
+        else
+          puts "Your shot on #{shot_coordinate} was a MISS!"
       end
       player_wins
       puts "My turn to shoot!!"
@@ -96,12 +103,12 @@ class Game #have to make runner file
       @player_board.cells[cpu_shot_coordinate].fire_upon
     
       if @player_board.cells[cpu_shot_coordinate].ship
-        puts "The computer hit your ship!"
+        puts "The computer's shot on #{cpu_shot_coordinate} hit your ship!"
         if @player_board.cells[cpu_shot_coordinate].ship.sunk?
           puts "Your ship has been sunk!"
         end
-      else
-        puts "The computer missed your ship!"
+        else
+        puts "The computer's shot on #{cpu_shot_coordinate} missed your ship!"
       end
       display_boards
       cpu_wins
