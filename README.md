@@ -1,16 +1,31 @@
-**Iteration 3 did not provide an interaction pattern. How did you approach designing this iteration? If you did not get to Iteration 3, reflect on how you think you would’ve approached the design and problem solving process.**
+<div align="center">
+    <img src="https://github.com/Gabe-Torres/BattleShip_/assets/127896538/3135ffa2-6abf-455c-a975-8bcbf1db9195" alt="battle ship">
+</div>
 
-`We tried to make the spec but realized it would be hard to test. We then decided to make an outline to decided what we wanted the game class to do. We reached out to others`
-`and learned that the game class is best viewed as a class that plays the game one step at a time.`
+![Made with Ruby](https://img.shields.io/badge/Made%20with-Ruby-%23990000?style=for-the-badge&logo=ruby&logoColor=white)
 
-**If you had one more day to work on this project, what would you work on?**
+<p> 
+This is a terminal Ruby game that uses an algorithm to render Battleship, a classic board game where players place one or more ships on a grid board. Players then take turns trying to 'sink' the other player’s ships by guessing their coordinates. The game ends when one player's ships are all hit and 'sunk'.
+</p>
 
-`Refactor the board class and the helper methods, and make the methods more condense. We would of liked to work more on game spec, and start iteration 4.`
 
-**Describe the pairing techniques you used while working on this project.**
+<details>
+<summary>The Team </summary>
 
-`We did both driver/navigator and async according to our schedules.`
+### 
+- Gabe Torres [![GitHub](https://img.shields.io/badge/-GitHub-grey?style=flat&logo=github&logoColor=white)](https://github.com/Gabe-Torres) [![LinkedIn](https://img.shields.io/badge/-blue?style=flat&logo=Linkedin&logoColor=white)](https://www.linkedin.com/in/gabe-torres-74a515269/)<br><br>
+- Derek Chavez [![GitHub](https://img.shields.io/badge/-GitHub-grey?style=flat&logo=github&logoColor=white)](https://github.com/DChavez18) [![LinkedIn](https://img.shields.io/badge/-blue?style=flat&logo=Linkedin&logoColor=white)](https://www.linkedin.com/in/derek-chavez/)<br><br>
+</details>
 
-**Describe how feedback was shared over the course of this project.**
+<details>
 
-`Most of our feedback was given directly while we were working. We also set aside time for meetings to debrief our code and share feedback.`
+## Important Links
+- [GitHub](https://github.com/Gabe-Torres/BattleShip_)
+
+**Installing**
+ - Fork and clone this repo
+  - Run ruby battleship_runner.rb
+  - Prepare for battle
+
+</details>
+
